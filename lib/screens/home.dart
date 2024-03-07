@@ -1,5 +1,6 @@
 import 'package:cours_flutter_rick_et_morty/screens/details_page.dart';
 import 'package:cours_flutter_rick_et_morty/service/characters_service.dart';
+import 'package:cours_flutter_rick_et_morty/shared/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -12,9 +13,14 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        // Permet de supprimer la flèche "retour arrière" sur nos vues principales
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Rick & Morty - Profiler"),
+        // On peut renommer cet écran pour tenir compte de la nouvelle structure de nottre application
+        title: const Text("Personnages"),
       ),
+      // BottomNavBar avec l'index sélectionné : 0
+      bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 0),
       // On wrap le ListView dans un FutureBuilder
       body: FutureBuilder(
         future: service.fetchCharacters(),
@@ -29,10 +35,10 @@ class Home extends StatelessWidget {
             );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
+          } else {
+            // Par défaut, afficher un Spinner
+            return const Center(child: CircularProgressIndicator());
           }
-
-          // Par défaut, afficher un Spinner
-          return const CircularProgressIndicator();
         },
       ),
     );
