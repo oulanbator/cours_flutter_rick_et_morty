@@ -1,62 +1,33 @@
 import 'package:cours_flutter_rick_et_morty/model/character.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CharactersService {
-  var rick = Character(
-    name: "Rick Sanchez",
-    image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-    species: "Human",
-    origin: "Earth (C-137)",
-    status: "Alive",
-  );
+  Future<List<Character>> fetchCharacters() async {
+    final response =
+        await http.get(Uri.parse('https://rickandmortyapi.com/api/character'));
 
-  var morty = Character(
-    name: "Morty Smith",
-    image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-    species: "Human",
-    origin: "unknown",
-    status: "Alive",
-  );
+    // Si l'on a un HTTP 200, on parse la réponse de notre webservice
+    if (response.statusCode == 200) {
+      return parseCharacters(response.body);
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
 
-  var summer = Character(
-    name: "Summer Smith",
-    image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
-    species: "Human",
-    origin: "Earth (Replacement Dimension)",
-    status: "Alive",
-  );
+  List<Character> parseCharacters(String responseBody) {
+    // Parse la réponse en tant que Map<String, dynamic>, à l'aide de jsonDecode()
+    final Map<String, dynamic> data = jsonDecode(responseBody);
 
-  var beth = Character(
-    name: "Beth Smith",
-    image: "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
-    species: "Human",
-    origin: "Earth (Replacement Dimension)",
-    status: "Alive",
-  );
+    // Récupère la clé 'results' de l'objet data, en tant que liste de dynamic (variable non typée)
+    final List<dynamic> results = data['results'];
 
-  var jerry = Character(
-    name: "Jerry Smith",
-    image: "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
-    species: "Human",
-    origin: "Earth (Replacement Dimension)",
-    status: "Alive",
-  );
+    // Effectue un mapping de chaque élément 'dynamic' de notre List
+    // Map un 'Character' grâce au constructeur .fromJson
+    // Retourne une List<Character> avec .toList();
+    List<Character> characters =
+        results.map((jsonElement) => Character.fromJson(jsonElement)).toList();
 
-  var princess = Character(
-    name: "Abadango Cluster Princess",
-    image: "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
-    species: "Alien",
-    origin: "Abadango",
-    status: "Alive",
-  );
-
-  final List<Character> profiles = [];
-
-  CharactersService() {
-    profiles.add(rick);
-    profiles.add(morty);
-    profiles.add(summer);
-    profiles.add(beth);
-    profiles.add(jerry);
-    profiles.add(princess);
+    return characters;
   }
 }

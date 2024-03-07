@@ -7,17 +7,33 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Les profils "en dur" sont stockés dans cette variable
-    var profiles = CharactersService().profiles;
+    // référence à notre service
+    var service = CharactersService();
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Rick & Morty - Profiler"),
       ),
-      body: ListView.builder(
-        itemCount: profiles.length,
-        itemBuilder: (context, index) => _listElement(context, profiles[index]),
+      // On wrap le ListView dans un FutureBuilder
+      body: FutureBuilder(
+        future: service.fetchCharacters(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            // Si l'on récupère la data correctement, afficher un ListView
+            var characters = snapshot.data!;
+            return ListView.builder(
+              itemCount: characters.length,
+              itemBuilder: (context, index) =>
+                  _listElement(context, characters[index]),
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+
+          // Par défaut, afficher un Spinner
+          return const CircularProgressIndicator();
+        },
       ),
     );
   }
