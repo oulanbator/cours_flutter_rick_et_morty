@@ -1,4 +1,4 @@
-# rick_and_morty
+# TP : Rick et Morty
 
 Un TP pour voir différents concepts clés dans Flutter :
 - Les ListViews
@@ -8,6 +8,7 @@ Un TP pour voir différents concepts clés dans Flutter :
 - Une barre de navigation
 
 Ce TP s'appuie sur l'API ouverte de Rick et Morty : https://rickandmortyapi.com
+
 Nous les remercions chaleureusement <3 !
 
 
@@ -87,5 +88,5 @@ L'API est relativement limitée sur les informations fournies sur un épisode. M
 
 - Créer la classe Episode avec des champs pour stocker le code de l'episode (exp. S01E01), son titre et sa date de sortie.
 - Créer un constructeur fromJson() pour vous aider à parser votre réponse HTTP
-- Créer un service EpisodeSerivce qui va envoyer les appels HTTP et traiter la réponse
+- Créer un service EpisodeService qui va envoyer les appels HTTP et traiter la réponse
 - Implémenter l'écran Episodes. Compte tenu des informations que nous avons pour chaque épisode, le plus simple serait d'utiliser une ListView. Chaque ListTile afficherait le code, le titre et la date de l'épisode.
