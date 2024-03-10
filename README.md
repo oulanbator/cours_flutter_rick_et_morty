@@ -81,6 +81,8 @@ Une BottomNavigationBar n'est qu'un type de layout parmis d'autres pour la navig
 
 > https://github.com/oulanbator/cours-flutter-bottom-navigation-app
 
+#### App démo :
+> https://github.com/oulanbator/cours_flutter_bottom_navbar
 
 ## 5 - Création de l'écran Episodes
 
