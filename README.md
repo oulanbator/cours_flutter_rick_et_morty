@@ -25,6 +25,8 @@ L'idée est d'utiliser les widgets ListView et ListTile pour afficher la liste d
 
 > https://docs.flutter.dev/cookbook/lists/long-lists (utlisation du constructeur .builder())
 
+#### App démo : 
+> https://github.com/oulanbator/cours_flutter_simple_list_view
 
 ## 2 - Intéractivité et navigation
 
@@ -38,6 +40,8 @@ Nous avons volontairement affiché le minimum d'informations dans nos ListTiles.
 
 > https://docs.flutter.dev/cookbook/navigation/navigation-basics#3-return-to-the-first-route-using-navigatorpop 
 
+#### App démo : 
+> https://github.com/oulanbator/cours_flutter_simple_list_view
 
 ## 3 - Requêtes HTTP
 
