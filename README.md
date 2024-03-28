@@ -193,7 +193,7 @@ var _isLoading = false;
 - Créer une méthode asynchrone pour charger des éléments via notre service
 ```
 // Fonction pour charger des éléments supplémentaires
-void _loadMoreItems() async {
+void _loadItems() async {
     // Return si déjà en train de charger
     if (_isLoading) return;
     // Sinon, set le bool pour indiquer que l'on charge des éléments
